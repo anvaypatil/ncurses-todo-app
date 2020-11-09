@@ -7,11 +7,11 @@
 #include "WindowManager.h"
 
 void TaskManager::addPromptControls() {
-    inputWindow->addInputControl(QUIT_APPLICATION, "Quit Application","[q]");
-    inputWindow->addInputControl(INSERT_TASK, "Insert Task","[i]");
-    inputWindow->addInputControl(DELETE_TASK, "Delete Task","[d]");
-    inputWindow->addInputControl(MOVE_DOWN, "Navigate Down","[Down Arrow]");
-    inputWindow->addInputControl(MOVE_UP, "Navigate Up","[Up Arrow]");
+    inputWindow->addInputControl(QUIT_APPLICATION, "Quit Application", "[q]");
+    inputWindow->addInputControl(INSERT_TASK, "Insert Task", "[i]");
+    inputWindow->addInputControl(DELETE_TASK, "Delete Task", "[d]");
+    inputWindow->addInputControl(MOVE_DOWN, "Navigate Down", "[Down Arrow]");
+    inputWindow->addInputControl(MOVE_UP, "Navigate Up", "[Up Arrow]");
     WindowManager::repaintWindows();
 }
 
@@ -21,7 +21,7 @@ TaskManager::TaskManager() {
             std::string("Todo List")
     );
     inputWindow = std::make_shared<InputWindow>(
-            Dimension{1, 25, 80, 8},
+            Dimension{1, 22, 80, 8},
             "Control Pane"
     );
     dataList = std::make_shared<DataList>();
@@ -66,13 +66,13 @@ void TaskManager::displayTasks(std::shared_ptr<std::vector<TextContent>> &textLi
     for (uint i = 0; i < dataList->size(); i++) {
         char t[80];
         TextContent textItem(windowPtr.get());
-        const auto width = windowPtr->getWidth()-2;
+        const auto width = windowPtr->getWidth() - 8;
         const std::string lmt = " %-" + std::to_string(width) + "s";
         sprintf(t, lmt.c_str(), dataList->taskAt(i).c_str());
         TextContent itemIndex(windowPtr.get());
         itemIndex.withColor(Colors::YELLOW)
                 ->atPosition(Position{1, uint(i)})
-                ->putPlainText(std::to_string(i+1));
+                ->putPlainText(std::to_string(i + 1));
         const auto item = textItem.withColor(Colors::BLUE)
                 ->atPosition(Position{3, uint(i)});
         if (dataList->getHighlightedIndex() == i) {
