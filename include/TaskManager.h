@@ -26,6 +26,9 @@ private:
     std::shared_ptr<InputWindow> inputWindow;
     std::shared_ptr<DataList> dataList;
     void displayTasks(std::shared_ptr<std::vector<TextContent>> &textList);
+    uint top, bottom;
+
+    bool checkOutOfBound();
 };
 
 

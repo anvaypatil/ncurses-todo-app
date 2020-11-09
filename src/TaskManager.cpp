@@ -17,7 +17,7 @@ void TaskManager::addPromptControls() {
 
 TaskManager::TaskManager() {
     windowPtr = std::make_shared<Window>(
-            Dimension{1, 1, 80, 20},
+            Dimension{1, 1, 80, 5},
             std::string("Todo List")
     );
     inputWindow = std::make_shared<InputWindow>(
@@ -63,7 +63,9 @@ void TaskManager::taskLoop() {
 }
 
 void TaskManager::displayTasks(std::shared_ptr<std::vector<TextContent>> &textList) {
-    for (uint i = 0; i < dataList->size(); i++) {
+    windowPtr->setWindowName("Top:[" + std::to_string(top) + "," + std::to_string(bottom - 1) + "] " +
+                             "  size:[" + std::to_string(dataList->size()) + "]");
+    for (uint i = top; i < bottom; i++) {
         char t[80];
         TextContent textItem(windowPtr.get());
         const auto width = windowPtr->getWidth() - 8;
@@ -71,10 +73,10 @@ void TaskManager::displayTasks(std::shared_ptr<std::vector<TextContent>> &textLi
         sprintf(t, lmt.c_str(), dataList->taskAt(i).c_str());
         TextContent itemIndex(windowPtr.get());
         itemIndex.withColor(Colors::YELLOW)
-                ->atPosition(Position{1, uint(i)})
+                ->atPosition(Position{1, uint(i - top)})
                 ->putPlainText(std::to_string(i + 1));
         const auto item = textItem.withColor(Colors::BLUE)
-                ->atPosition(Position{3, uint(i)});
+                ->atPosition(Position{3, uint(i - top)});
         if (dataList->getHighlightedIndex() == i) {
             item->withInvertedText();
         }
@@ -87,24 +89,53 @@ void TaskManager::addTask() {
     inputWindow->putPromptAt(Position{0, 0});
     dataList->addTask(inputWindow->getInputString());
     dataList->setHighlighted(0);
+    if (checkOutOfBound()) {
+        top = 0;
+        bottom = windowPtr->getHeight() - 2;
+    } else {
+        top = 0;
+        bottom = dataList->size();
+    }
 }
+
+bool TaskManager::checkOutOfBound() { return dataList->size() > windowPtr->getHeight() - 2; }
 
 void TaskManager::moveUp() {
     const uint index = dataList->getHighlightedIndex();
-    const uint newIndex = (index == 0) ? dataList->size() - 1 : index - 1;
+    const uint newIndex = (index == 0) ? 0 : index - 1;
     dataList->setHighlighted(newIndex);
+    if (checkOutOfBound() && index == top) {
+        top = (top == 0) ? 0 : top - 1;
+        bottom = top + windowPtr->getHeight() - 2;
+    }
 }
 
 void TaskManager::moveDown() {
     const uint index = dataList->getHighlightedIndex();
-    const uint newIndex = (dataList->size() == (index + 1)) ? 0 : index + 1;
+    const uint newIndex = (dataList->size() == (index + 1)) ? index : index + 1;
     dataList->setHighlighted(newIndex);
+    if (checkOutOfBound() && index == (bottom-1)) {
+        bottom = (dataList->size() == (bottom)) ? bottom : bottom + 1;
+        top = bottom - (windowPtr->getHeight() - 2);
+    }
 }
 
 void TaskManager::deleteTask() {
     if (dataList->size() != 0) {
         const uint index = dataList->getHighlightedIndex();
+        std::cout<<"8";
         dataList->deleteTask(index);
-        dataList->setHighlighted((index != 0) ? (index - 1) : 0);
+        std::cout<<"7";
+        if (dataList->size() != 0) {
+            dataList->setHighlighted(index - 1);
+        }
+        std::cout<<"6";
+        if (checkOutOfBound()) {
+            top = 0;
+            bottom = windowPtr->getHeight() - 2;
+        } else {
+            top = 0;
+            bottom = (dataList->size() != 0) ? dataList->size() : 0;
+        }
     }
 }
