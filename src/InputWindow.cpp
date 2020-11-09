@@ -79,7 +79,9 @@ int InputWindow::getPromptControl() {
     while (true) {
         ch = getch();
         if (controls.find(ch) != controls.end()) {
-            inputWindow->setWindowName(controls[ch].first);
+            if(ch<128) {
+                inputWindow->setWindowName(controls[ch].first);
+            }
             break;
         }
     }
