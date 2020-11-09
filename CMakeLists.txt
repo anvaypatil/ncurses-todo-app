@@ -1,19 +1,4 @@
 cmake_minimum_required(VERSION 3.16)
-#project(ncurses_sample)
-#
-#set(CMAKE_CXX_STANDARD 20)
-#
-#find_package(Curses REQUIRED)
-#include_directories(${CURSES_INCLUDE_DIRS})
-#include_directories(${CURSES_INCLUDE_DIR})
-#include_directories(include)
-#
-#add_executable(todoApp src/main.cpp src/Window.cpp include/Window.h include/Position.h src/TextContent.cpp include/TextContent.h)
-#target_link_libraries(todoApp ${CURSES_LIBRARIES})
-#target_compile_options(todoApp PRIVATE -Wall -Wextra)
-
-
-
 project(monitor)
 find_package(Curses REQUIRED)
 include_directories(${CURSES_INCLUDE_DIRS})

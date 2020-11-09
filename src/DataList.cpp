@@ -19,7 +19,7 @@ DataList::~DataList() {
 }
 
 void DataList::addTask(std::string string) {
-    items->insert(items->begin()+highlightedIndex, TaskItem{std::string(string)});
+    items->insert(items->begin(), TaskItem{std::string(string)});
     this->highlightedIndex = items->size() - 1;
 }
 
