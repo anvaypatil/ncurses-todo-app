@@ -29,6 +29,7 @@ private:
     uint top, bottom;
 
     bool checkOutOfBound();
+    char *getFormattedText(std::string task);
 };
 
 

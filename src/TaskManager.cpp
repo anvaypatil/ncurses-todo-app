@@ -65,27 +65,34 @@ void TaskManager::taskLoop() {
 void TaskManager::displayTasks(std::shared_ptr<std::vector<TextContent>> &textList) {
     windowPtr->setWindowName("Todo's:(" + std::to_string(dataList->size()) + ")");
     for (uint i = top; i < bottom; i++) {
-        char t[80];
         TextContent textItem(windowPtr.get());
-        const auto width = windowPtr->getWidth() - 8;
-        const std::string lmt = " %-" + std::to_string(width) + "s";
-        sprintf(t, lmt.c_str(), dataList->taskAt(i).c_str());
+        char *text = getFormattedText(dataList->taskAt(i));
         TextContent itemIndex(windowPtr.get());
+        // colorize index;
         const auto index = itemIndex.atPosition(Position{1, uint(i - top)});
         if (dataList->getHighlightedIndex() == i) {
             index->withColor(Colors::MAGENTA)->withInvertedText();
         } else{
             index->withColor(Colors::WHITE);
         }
+        // colorize text;
         index->putPlainText(std::to_string(i + 1));
         const auto item = textItem.withColor(Colors::BLUE)
                 ->atPosition(Position{3, uint(i - top)});
         if (dataList->getHighlightedIndex() == i) {
             item->withInvertedText();
         }
-        item->putPlainText(t);
+        item->putPlainText(text);
         textList->push_back(textItem);
     }
+}
+
+char *TaskManager::getFormattedText(std::string task) {
+    char text[80];
+    const auto width = windowPtr->getWidth() - 8;
+    const std::string lmt = " %-" + std::to_string(width) + "s";
+    sprintf(text, lmt.c_str(),task.c_str());
+    return (text);
 }
 
 void TaskManager::addTask() {
