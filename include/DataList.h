@@ -8,13 +8,43 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include "Serializable.h"
 
-class TaskItem {
+class TaskItem{
 public:
     TaskItem(const std::string &task);
     std::string getTask();
+    // Copy constructor
+    TaskItem(const TaskItem &other) {
+        copyContent(other);
+    }
+    // Copy assignment
+    TaskItem &operator=(const TaskItem &other) {
+        if (this != &other) {
+            copyContent(other);
+        }
+        return *this;
+    }
+    // Move assignment
+    TaskItem &operator=(TaskItem &&other){
+        if (this != &other) {
+            moveContent(other);
+        }
+        return *this;
+    }
+    // Move Constructor
+    TaskItem(TaskItem &&other){
+        moveContent(other);
+    }
 private:
     std::string task;
+    void copyContent(const TaskItem &other) {
+       task = std::string(other.task);
+    }
+
+    void moveContent(const TaskItem &other) {
+        task = std::move(other.task);
+    }
 };
 
 class DataList {
