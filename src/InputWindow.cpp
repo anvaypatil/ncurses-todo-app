@@ -3,7 +3,6 @@
 //
 
 #include <iostream>
-#include <AppConfig.h>
 #include "InputWindow.h"
 
 InputWindow::InputWindow(Dimension dimension, const std::string windowName) {
@@ -79,7 +78,7 @@ int InputWindow::getPromptControl() {
     while (true) {
         ch = getch();
         if (controls.find(ch) != controls.end()) {
-            if(ch<128) {
+            if(33<ch && ch<126) {
                 inputWindow->setWindowName(controls[ch].first);
             }
             break;

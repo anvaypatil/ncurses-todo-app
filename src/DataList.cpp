@@ -4,11 +4,6 @@
 
 #include "DataList.h"
 
-TaskItem::TaskItem(const std::string &task) : task(task) {}
-
-std::string TaskItem::getTask() {
-    return std::string(task);
-}
 
 DataList::DataList() {
     items = std::make_unique<std::vector<TaskItem>>();
@@ -19,8 +14,11 @@ DataList::~DataList() {
 }
 
 void DataList::addTask(std::string string) {
-    items->insert(items->begin(), TaskItem{std::string(string)});
-    this->highlightedIndex = items->size() - 1;
+    items->push_back(std::string(string));
+}
+
+TaskItem DataList::taskAt(size_t position) {
+    return items->at(position);
 }
 
 void DataList::deleteTask(const size_t index) {
@@ -31,11 +29,6 @@ size_t DataList::size() {
     return items->size();
 }
 
-std::string DataList::taskAt(size_t position) {
-    auto taskItem = items->at(position);
-    return taskItem.getTask();
-}
-
 void DataList::setHighlighted(uint index) {
     if (index < items->size()) {
         this->highlightedIndex = index;
@@ -44,4 +37,8 @@ void DataList::setHighlighted(uint index) {
 
 uint DataList::getHighlightedIndex() {
     return highlightedIndex;
+}
+
+void DataList::clear() {
+    items->clear();
 }

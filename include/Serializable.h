@@ -7,7 +7,7 @@
 template <class Type>
 class Serializable {
 public:
-    virtual char* serialize(Type object);
-    virtual Type deserialize(char* stream);
+    virtual std::string serialize(Type object) = 0 ;
+    virtual Type deserialize(std::string stream) = 0;
 };
 #endif //MONITOR_SERIALIZABLE_H

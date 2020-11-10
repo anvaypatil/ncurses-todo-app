@@ -12,6 +12,7 @@ void TaskManager::addPromptControls() {
     inputWindow->addInputControl(DELETE_TASK, "Delete Task", "[d]");
     inputWindow->addInputControl(MOVE_DOWN, "Navigate Down", "[Down Arrow]");
     inputWindow->addInputControl(MOVE_UP, "Navigate Up", "[Up Arrow]");
+    inputWindow->addInputControl(COMPLETED, "Mark as Complete", "[Space Bar]");
     WindowManager::repaintWindows();
 }
 
@@ -27,6 +28,7 @@ TaskManager::TaskManager() {
     dataList = std::make_shared<DataList>();
     WindowManager::registerWindow(windowPtr);
     WindowManager::registerWindow(inputWindow->getWindow());
+    taskPersistence = std::make_unique<TaskPersistence>(dataList);
 }
 
 void TaskManager::manageTasks() {
@@ -87,25 +89,26 @@ void TaskManager::displayTasks(std::shared_ptr<std::vector<TextContent>> &textLi
     }
 }
 
-std::string TaskManager::getFormattedText(std::string task) {
+std::string TaskManager::getFormattedText(TaskItem task) {
     char text[80];
     const auto width = windowPtr->getWidth() - 8;
     const std::string lmt = " %-" + std::to_string(width) + "s";
-    sprintf(text, lmt.c_str(),task.c_str());
+    sprintf(text, lmt.c_str(),task.getTask().c_str());
     return std::string(text);
 }
 
 void TaskManager::addTask() {
     inputWindow->putPromptAt(Position{0, 0});
     dataList->addTask(inputWindow->getInputString());
-    dataList->setHighlighted(0);
+    dataList->setHighlighted(dataList->size() -1 );
     if (checkOutOfBound()) {
-        top = 0;
-        bottom = windowPtr->getHeight() - 2;
+        bottom = dataList->size();
+        top = dataList->size() - (windowPtr->getHeight() -2);
     } else {
         top = 0;
         bottom = dataList->size();
     }
+    taskPersistence->save();
 }
 
 bool TaskManager::checkOutOfBound() { return dataList->size() > windowPtr->getHeight() - 2; }
@@ -145,4 +148,5 @@ void TaskManager::deleteTask() {
             bottom = (dataList->size() != 0) ? dataList->size() : 0;
         }
     }
+    taskPersistence->save();
 }

@@ -10,6 +10,8 @@
 #include "Window.h"
 #include "InputWindow.h"
 #include "DataList.h"
+#include "TaskItem.h"
+#include "TaskPersistence.h"
 
 class TaskManager {
 public:
@@ -29,7 +31,8 @@ private:
     uint top, bottom;
 
     bool checkOutOfBound();
-    std::string getFormattedText(std::string task);
+    std::string getFormattedText(TaskItem task);
+    std::unique_ptr<TaskPersistence> taskPersistence;
 };
 
 

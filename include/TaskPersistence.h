@@ -6,8 +6,16 @@
 #define MONITOR_TASK_PERSISTENCE_H
 
 
-class TaskPersistence {
+#include <memory>
+#include "DataList.h"
 
+class TaskPersistence {
+public:
+    TaskPersistence(std::shared_ptr<DataList> dataList);
+    void save();
+    void load();
+private:
+    std::shared_ptr<DataList> dataList;
 };
 
 
