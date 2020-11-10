@@ -16,6 +16,7 @@ public:
 private:
     std::string task;
 };
+
 class DataList {
 public:
     DataList();

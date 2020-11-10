@@ -44,7 +44,6 @@ void Window::moveTo(Position position) {
 // Copy Constructor
 Window::Window(const Window &other) {
     copyContent(other);
-    std::cout<<"Copy Constructor"+std::to_string(rand()*100)<<std::endl;
 }
 
 //copy assignment
@@ -52,7 +51,6 @@ Window &Window::operator=(const Window &other) {
     if (this != &other) {
         copyContent(other);
     }
-    std::cout<<"Copy Operator"<<std::endl;
     return *this;
 }
 // Move Constructor
@@ -60,12 +58,10 @@ Window &Window::operator=(Window &&other) {
     if (this != &other) {
         moveContent(other);
     }
-    std::cout<<"Move Constructor"<<std::endl;
     return *this;
 }
 // Move Assignment
 Window::Window(Window &&other) {
-    std::cout<<"Move Operator"<<std::endl;
     moveContent(other);
 }
 
