@@ -17,7 +17,7 @@ void DataList::addTask(std::string task) {
     items->push_back(std::string(task));
 }
 
-TaskItem DataList::taskAt(size_t position) {
+TaskItem &DataList::taskAt(size_t position) {
     return items->at(position);
 }
 

@@ -18,7 +18,7 @@ public:
     void addTask(std::string string);
     void addTask(TaskItem item);
     void deleteTask(const size_t index);
-    TaskItem taskAt(size_t position);
+    TaskItem &taskAt(size_t position);
     size_t size();
     void clear();
     void setHighlighted(uint index);

@@ -16,7 +16,7 @@ enum Interrupts {
     DELETE_TASK = 'd',
     MOVE_UP = KEY_UP,
     MOVE_DOWN = KEY_DOWN,
-    COMPLETED = ' ',
+    TOGGLE_TASK_COMPLETE = ' ',
     DEFAULT = '`'
 };
 

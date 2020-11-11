@@ -7,6 +7,7 @@
 
 
 #include <string>
+#include <iostream>
 #include "Serializable.h"
 
 class TaskItem{
@@ -15,6 +16,8 @@ public:
     bool isComplete();
     void toggleComplete();
     std::string getTask();
+    std::string taskDisplayText(uint width);
+    std::string taskCompletedText(uint width);
     // Copy constructor
     TaskItem(const TaskItem &other) {
         copyContent(other);
@@ -47,7 +50,7 @@ private:
 
     void moveContent(const TaskItem &other) {
         task = std::move(other.task);
-        complete = other.complete;
+        complete = std::move(other.complete);
     }
 };
 #endif //MONITOR_TASKITEM_H

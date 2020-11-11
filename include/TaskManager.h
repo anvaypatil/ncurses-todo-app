@@ -22,6 +22,7 @@ private:
     void taskLoop();
     void addTask();
     void deleteTask();
+    void toggleCompleteTask();
     void moveUp();
     void moveDown();
     std::shared_ptr<Window> windowPtr;
@@ -31,7 +32,6 @@ private:
     uint top, bottom;
 
     bool checkOutOfBound();
-    std::string getFormattedText(TaskItem task);
     std::unique_ptr<TaskPersistence> taskPersistence;
 
     void initDataListForDisplay();

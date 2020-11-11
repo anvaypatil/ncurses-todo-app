@@ -5,6 +5,7 @@
 #include <iostream>
 #include "TaskManager.h"
 #include "WindowManager.h"
+#include "HelperFunctions.h"
 
 TaskManager::TaskManager() {
     windowPtr = std::make_shared<Window>(
@@ -27,7 +28,7 @@ void TaskManager::addPromptControls() {
     inputWindow->addInputControl(DELETE_TASK, "Delete Task", "[d]");
     inputWindow->addInputControl(MOVE_DOWN, "Navigate Down", "[Down Arrow]");
     inputWindow->addInputControl(MOVE_UP, "Navigate Up", "[Up Arrow]");
-    inputWindow->addInputControl(COMPLETED, "Mark as Complete", "[Space Bar]");
+    inputWindow->addInputControl(TOGGLE_TASK_COMPLETE, "Mark as Complete", "[Space Bar]");
     WindowManager::repaintWindows();
 }
 
@@ -64,6 +65,9 @@ void TaskManager::taskLoop() {
             case DELETE_TASK:
                 deleteTask();
                 break;
+            case TOGGLE_TASK_COMPLETE:
+                toggleCompleteTask();
+                break;
             default:
                 break;
         }
@@ -77,35 +81,53 @@ void TaskManager::refreshDisplayList() {
 
 void TaskManager::displayTasks() {
     windowPtr->setWindowName("Todo's:(" + std::to_string(dataList->size()) + ")");
+    uint paneWidth = windowPtr->getWidth();
     for (uint i = top; i < bottom; i++) {
-        TextContent taskItem(windowPtr.get());
-        std::string text = getFormattedText(dataList->taskAt(i));
+        TextContent taskText(windowPtr.get());
+        TaskItem task = dataList->taskAt(i);
         TextContent itemIndex(windowPtr.get());
         // colorize index;
-        const auto index = itemIndex.atPosition(Position{1, uint(i - top)});
+        const auto indexColumn = itemIndex.atPosition(Position{1, uint(i - top)});
         if (dataList->getHighlightedIndex() == i) {
-            index->withColor(Colors::MAGENTA)->withInvertedText();
+            indexColumn->withColor(Colors::MAGENTA);
         } else {
-            index->withColor(Colors::WHITE);
+            indexColumn->withColor(Colors::WHITE);
         }
-        // colorize text;
-        index->putPlainText(std::to_string(i + 1));
-        const auto item = taskItem.withColor(Colors::BLUE)
+        const std::string indexText = HelperFunctions::addSurroundPad(' ', 3, 1, std::to_string(i + 1));
+        indexColumn->putPlainText(indexText);
+
+        const auto taskColumn = taskText.withColor(Colors::BLUE)
                 ->atPosition(Position{3, uint(i - top)});
         if (dataList->getHighlightedIndex() == i) {
-            item->withInvertedText();
+            taskColumn->withInvertedText();
         }
-        item->putPlainText(text);
+        taskColumn->putPlainText(task.taskDisplayText(paneWidth - 8));
+
+        const auto completedColumn = taskText.atPosition(Position{paneWidth - 8, uint(i - top)});
+        if (dataList->getHighlightedIndex() == i) {
+            if (task.isComplete()) {
+                completedColumn->withColor(Colors::RED)->withInvertedText();
+            } else {
+                completedColumn->withColor(Colors::BLUE)->withInvertedText();
+            }
+        } else {
+            if (task.isComplete()) {
+                completedColumn->withColor(Colors::RED);
+            } else {
+                completedColumn->withColor(Colors::YELLOW);
+            }
+        }
+        completedColumn->putPlainText(task.taskCompletedText(3));
+
+        const auto paddingRight = taskText.withColor(Colors::BLUE)
+                ->atPosition(Position{paneWidth - 5, uint(i - top)});
+        if (dataList->getHighlightedIndex() == i) {
+            paddingRight->withInvertedText();
+        }
+        paddingRight->putPlainText("  ");
     }
 }
 
-std::string TaskManager::getFormattedText(TaskItem task) {
-    char text[80];
-    const auto width = windowPtr->getWidth() - 8;
-    const std::string lmt = " %-" + std::to_string(width) + "s";
-    sprintf(text, lmt.c_str(), task.getTask().c_str());
-    return std::string(text);
-}
 
 void TaskManager::addTask() {
     inputWindow->putPromptAt(Position{0, 0});
@@ -122,6 +144,14 @@ void TaskManager::addTask() {
 }
 
 bool TaskManager::checkOutOfBound() { return dataList->size() > windowPtr->getHeight() - 2; }
+
+void TaskManager::toggleCompleteTask() {
+    if (dataList->size() != 0) {
+        const uint index = dataList->getHighlightedIndex();
+        dataList->taskAt(index).toggleComplete();
+        taskPersistence->save();
+    }
+}
 
 void TaskManager::moveUp() {
     const uint index = dataList->getHighlightedIndex();
