@@ -1,9 +1,6 @@
-//
-// Created by newton on 11/4/20.
-//
 
-#ifndef MONITOR_DATALIST_H
-#define MONITOR_DATALIST_H
+#ifndef APP_DATA_LIST_H
+#define APP_DATA_LIST_H
 
 #include <string>
 #include <vector>
@@ -29,4 +26,4 @@ private:
 };
 
 
-#endif //MONITOR_DATALIST_H
+#endif //APP_DATA_LIST_H

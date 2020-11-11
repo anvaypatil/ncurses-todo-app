@@ -1,8 +1,4 @@
-//
-// Created by newton on 11/9/20.
-//
 
-#include <iostream>
 #include "TaskManager.h"
 #include "WindowManager.h"
 #include "HelperFunctions.h"

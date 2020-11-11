@@ -1,9 +1,6 @@
-//
-// Created by newton on 11/3/20.
-//
 
-#ifndef MONITOR_WINDOWMANAGER_H
-#define MONITOR_WINDOWMANAGER_H
+#ifndef APP_WINDOW_MANAGER_H
+#define APP_WINDOW_MANAGER_H
 
 #include "ColorManager.h"
 #include "Window.h"
@@ -24,4 +21,4 @@ private:
 };
 
 
-#endif //MONITOR_WINDOWMANAGER_H
+#endif //APP_WINDOW_MANAGER_H

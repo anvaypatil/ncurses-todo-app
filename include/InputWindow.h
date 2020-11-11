@@ -1,9 +1,6 @@
-//
-// Created by newton on 11/4/20.
-//
 
-#ifndef MONITOR_INPUTWINDOW_H
-#define MONITOR_INPUTWINDOW_H
+#ifndef APP_INPUTWINDOW_H
+#define APP_INPUTWINDOW_H
 
 
 #include <memory>
@@ -46,4 +43,4 @@ private:
     std::string control;
 };
 
-#endif //MONITOR_INPUTWINDOW_H
+#endif //APP_INPUTWINDOW_H

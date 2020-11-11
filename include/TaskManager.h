@@ -1,9 +1,6 @@
-//
-// Created by newton on 11/9/20.
-//
 
-#ifndef MONITOR_TASKMANAGER_H
-#define MONITOR_TASKMANAGER_H
+#ifndef APP_TASK_MANAGER_H
+#define APP_TASK_MANAGER_H
 
 
 #include <memory>
@@ -40,4 +37,4 @@ private:
 };
 
 
-#endif //MONITOR_TASKMANAGER_H
+#endif //APP_TASK_MANAGER_H

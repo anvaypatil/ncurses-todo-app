@@ -1,9 +1,6 @@
-//
-// Created by newton on 10/31/20.
-//
 
-#ifndef NCURSES_SAMPLE_POSITION_H
-#define NCURSES_SAMPLE_POSITION_H
+#ifndef APP_POSITION_H
+#define APP_POSITION_H
 
 
 class Position {
@@ -13,4 +10,4 @@ public:
 };
 
 
-#endif //NCURSES_SAMPLE_POSITION_H
+#endif //APP_POSITION_H

@@ -1,9 +1,6 @@
-//
-// Created by newton on 10/31/20.
-//
 
-#ifndef NCURSES_SAMPLE_WINDOW_H
-#define NCURSES_SAMPLE_WINDOW_H
+#ifndef APP_WINDOW_H
+#define APP_WINDOW_H
 
 
 #include <ncurses.h>
@@ -48,4 +45,4 @@ private:
 };
 
 
-#endif //NCURSES_SAMPLE_WINDOW_H
+#endif //APP_WINDOW_H

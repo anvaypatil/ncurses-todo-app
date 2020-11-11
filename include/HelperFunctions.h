@@ -1,9 +1,6 @@
-//
-// Created by ap on 11/11/20.
-//
 
-#ifndef MONITOR_HELPERFUNCTIONS_H
-#define MONITOR_HELPERFUNCTIONS_H
+#ifndef APP_HELPER_FUNCTIONS_H
+#define APP_HELPER_FUNCTIONS_H
 
 
 #include <string>
@@ -18,4 +15,4 @@ public:
 };
 
 
-#endif //MONITOR_HELPERFUNCTIONS_H
+#endif //APP_HELPER_FUNCTIONS_H

@@ -1,6 +1,3 @@
-//
-// Created by newton on 11/3/20.
-//
 
 #include "ColorManager.h"
 

@@ -1,6 +1,4 @@
-//
-// Created by ap on 10/11/20.
-//
+
 
 #include "TaskItem.h"
 #include "AppConfig.h"

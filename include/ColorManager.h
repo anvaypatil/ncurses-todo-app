@@ -1,9 +1,6 @@
-//
-// Created by newton on 11/3/20.
-//
 
-#ifndef MONITOR_COLORMANAGER_H
-#define MONITOR_COLORMANAGER_H
+#ifndef APP_COLOR_MANAGER_H
+#define APP_COLOR_MANAGER_H
 
 #include <ncurses.h>
 #include <Colors.h>
@@ -15,4 +12,4 @@ private:
 };
 
 
-#endif //MONITOR_COLORMANAGER_H
+#endif //APP_COLOR_MANAGER_H

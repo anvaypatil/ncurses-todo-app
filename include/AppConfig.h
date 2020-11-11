@@ -1,9 +1,6 @@
-//
-// Created by newton on 11/8/20.
-//
 
-#ifndef MONITOR_CONFIG
-#define MONITOR_CONFIG
+#ifndef APP_CONFIG_H
+#define APP_CONFIG_H
 
 #include <ncurses.h>
 #include <regex>
@@ -29,4 +26,4 @@ const std::string saveDirectoryPath =
 
 const std::string saveFilePath = saveDirectoryPath+"/"+fileName;
 
-#endif //MONITOR_CONFIG
+#endif //APP_CONFIG_H

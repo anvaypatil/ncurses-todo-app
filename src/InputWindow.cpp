@@ -1,6 +1,3 @@
-//
-// Created by newton on 11/4/20.
-//
 
 #include <iostream>
 #include "InputWindow.h"

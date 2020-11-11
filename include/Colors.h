@@ -1,9 +1,6 @@
-//
-// Created by newton on 11/3/20.
-//
 
-#ifndef MONITOR_COLORS_H
-#define MONITOR_COLORS_H
+#ifndef APP_COLORS_H
+#define APP_COLORS_H
 
 namespace Colors {
     enum Type {
@@ -20,4 +17,4 @@ namespace Colors {
             BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE
     };
 }
-#endif //MONITOR_COLORS_H
+#endif //APP_COLORS_H

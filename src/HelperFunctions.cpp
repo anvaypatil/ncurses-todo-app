@@ -1,6 +1,4 @@
-//
-// Created by ap on 11/11/20.
-//
+
 
 #include <iomanip>
 #include "HelperFunctions.h"

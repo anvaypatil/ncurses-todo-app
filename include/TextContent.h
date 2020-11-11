@@ -1,9 +1,6 @@
-//
-// Created by newton on 11/1/20.
-//
 
-#ifndef NCURSES_SAMPLE_TEXTCONTENT_H
-#define NCURSES_SAMPLE_TEXTCONTENT_H
+#ifndef APP_TEXT_CONTENT_H
+#define APP_TEXT_CONTENT_H
 
 
 #include "Window.h"
@@ -31,4 +28,4 @@ private:
 };
 
 
-#endif //NCURSES_SAMPLE_TEXTCONTENT_H
+#endif //APP_TEXT_CONTENT_H

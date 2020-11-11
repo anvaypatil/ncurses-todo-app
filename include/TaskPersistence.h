@@ -1,9 +1,6 @@
-//
-// Created by newton on 11/10/20.
-//
 
-#ifndef MONITOR_TASK_PERSISTENCE_H
-#define MONITOR_TASK_PERSISTENCE_H
+#ifndef APP_TASK_PERSISTENCE_H
+#define APP_TASK_PERSISTENCE_H
 
 
 #include <memory>
@@ -20,4 +17,4 @@ private:
 };
 
 
-#endif //MONITOR_TASK_PERSISTENCE_H
+#endif //APP_TASK_PERSISTENCE_H

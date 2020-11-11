@@ -1,6 +1,4 @@
-//
-// Created by newton on 10/31/20.
-//
+
 
 #include "Window.h"
 #include <memory>

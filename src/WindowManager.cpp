@@ -1,6 +1,4 @@
-//
-// Created by newton on 11/3/20.
-//
+
 
 #include "WindowManager.h"
 #include <ncurses.h>

@@ -1,9 +1,6 @@
-//
-// Created by ap on 10/11/20.
-//
 
-#ifndef MONITOR_TASKITEM_H
-#define MONITOR_TASKITEM_H
+#ifndef APP_TASKITEM_H
+#define APP_TASKITEM_H
 
 
 #include <string>
@@ -53,7 +50,7 @@ private:
         complete = std::move(other.complete);
     }
 };
-#endif //MONITOR_TASKITEM_H
+#endif //APP_TASKITEM_H
 
 
 #ifndef TASK_SERIALIZER_H

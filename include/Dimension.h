@@ -1,9 +1,6 @@
-//
-// Created by newton on 10/31/20.
-//
 
-#ifndef NCURSES_SAMPLE_DIMENSION_H
-#define NCURSES_SAMPLE_DIMENSION_H
+#ifndef APP_DIMENSION_H
+#define APP_DIMENSION_H
 
 class Dimension {
 public:
@@ -14,4 +11,4 @@ public:
 };
 
 
-#endif //NCURSES_SAMPLE_DIMENSION_H
+#endif //APP_DIMENSION_H
