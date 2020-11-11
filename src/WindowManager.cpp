@@ -12,7 +12,7 @@ void WindowManager::initializeScreen() {
     raw();
 
     use_default_colors();
-    if (has_colors()){
+    if (has_colors()) {
         start_color();
         ColorManager::initializeColors();
     }
@@ -30,9 +30,9 @@ void WindowManager::registerWindow(std::shared_ptr<Window> &window) {
 }
 
 void WindowManager::repaintWindows() {
- for (auto &win: windows){
-     win->draw();
- }
+    for (auto &win: windows) {
+        win->draw();
+    }
 }
 
 void WindowManager::terminateScreen() {

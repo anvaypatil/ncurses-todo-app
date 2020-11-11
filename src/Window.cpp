@@ -53,6 +53,7 @@ Window &Window::operator=(const Window &other) {
     }
     return *this;
 }
+
 // Move Constructor
 Window &Window::operator=(Window &&other) {
     if (this != &other) {
@@ -60,6 +61,7 @@ Window &Window::operator=(Window &&other) {
     }
     return *this;
 }
+
 // Move Assignment
 Window::Window(Window &&other) {
     moveContent(other);

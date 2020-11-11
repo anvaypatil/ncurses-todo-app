@@ -21,7 +21,7 @@ enum Interrupts {
 };
 
 const std::string DELIMITER = "$%$%$";
-const std::regex DELIMITER_REGEX ("\\" + DELIMITER);
+const std::regex DELIMITER_REGEX ("\\" + DELIMITER+"\\g");
 const std::string saveDirectory= ".todolist";
 const std::string fileName="todolist.txt";
 const std::string saveDirectoryPath =

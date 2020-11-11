@@ -6,16 +6,6 @@
 #include "TaskManager.h"
 #include "WindowManager.h"
 
-void TaskManager::addPromptControls() {
-    inputWindow->addInputControl(QUIT_APPLICATION, "Quit Application", "[q]");
-    inputWindow->addInputControl(INSERT_TASK, "Insert Task", "[i]");
-    inputWindow->addInputControl(DELETE_TASK, "Delete Task", "[d]");
-    inputWindow->addInputControl(MOVE_DOWN, "Navigate Down", "[Down Arrow]");
-    inputWindow->addInputControl(MOVE_UP, "Navigate Up", "[Up Arrow]");
-    inputWindow->addInputControl(COMPLETED, "Mark as Complete", "[Space Bar]");
-    WindowManager::repaintWindows();
-}
-
 TaskManager::TaskManager() {
     windowPtr = std::make_shared<Window>(
             Dimension{1, 1, 80, 20},
@@ -31,14 +21,32 @@ TaskManager::TaskManager() {
     taskPersistence = std::make_unique<TaskPersistence>(dataList);
 }
 
+void TaskManager::addPromptControls() {
+    inputWindow->addInputControl(QUIT_APPLICATION, "Quit Application", "[q]");
+    inputWindow->addInputControl(INSERT_TASK, "Insert Task", "[i]");
+    inputWindow->addInputControl(DELETE_TASK, "Delete Task", "[d]");
+    inputWindow->addInputControl(MOVE_DOWN, "Navigate Down", "[Down Arrow]");
+    inputWindow->addInputControl(MOVE_UP, "Navigate Up", "[Up Arrow]");
+    inputWindow->addInputControl(COMPLETED, "Mark as Complete", "[Space Bar]");
+    WindowManager::repaintWindows();
+}
+
 void TaskManager::manageTasks() {
+    taskPersistence->load();
+    initDataListForDisplay();
     addPromptControls();
     taskLoop();
 }
 
+void TaskManager::initDataListForDisplay() {
+    top = 0;
+    bottom = (dataList->size() > windowPtr->getHeight() - 2) ? windowPtr->getHeight() - 2 : dataList->size();
+    dataList->setHighlighted(0);
+}
+
 void TaskManager::taskLoop() {
-    std::shared_ptr<std::vector<TextContent>> textList = std::make_shared<std::vector<TextContent>>();
     while (true) {
+        refreshDisplayList();
         int control = inputWindow->getPromptControl();
         if (control == QUIT_APPLICATION) {
             break;
@@ -59,12 +67,15 @@ void TaskManager::taskLoop() {
             default:
                 break;
         }
-        displayTasks(textList);
-        WindowManager::repaintWindows();
     }
 }
 
-void TaskManager::displayTasks(std::shared_ptr<std::vector<TextContent>> &textList) {
+void TaskManager::refreshDisplayList() {
+    displayTasks();
+    WindowManager::repaintWindows();
+}
+
+void TaskManager::displayTasks() {
     windowPtr->setWindowName("Todo's:(" + std::to_string(dataList->size()) + ")");
     for (uint i = top; i < bottom; i++) {
         TextContent taskItem(windowPtr.get());
@@ -74,7 +85,7 @@ void TaskManager::displayTasks(std::shared_ptr<std::vector<TextContent>> &textLi
         const auto index = itemIndex.atPosition(Position{1, uint(i - top)});
         if (dataList->getHighlightedIndex() == i) {
             index->withColor(Colors::MAGENTA)->withInvertedText();
-        } else{
+        } else {
             index->withColor(Colors::WHITE);
         }
         // colorize text;
@@ -85,7 +96,6 @@ void TaskManager::displayTasks(std::shared_ptr<std::vector<TextContent>> &textLi
             item->withInvertedText();
         }
         item->putPlainText(text);
-        textList->push_back(taskItem);
     }
 }
 
@@ -93,17 +103,17 @@ std::string TaskManager::getFormattedText(TaskItem task) {
     char text[80];
     const auto width = windowPtr->getWidth() - 8;
     const std::string lmt = " %-" + std::to_string(width) + "s";
-    sprintf(text, lmt.c_str(),task.getTask().c_str());
+    sprintf(text, lmt.c_str(), task.getTask().c_str());
     return std::string(text);
 }
 
 void TaskManager::addTask() {
     inputWindow->putPromptAt(Position{0, 0});
     dataList->addTask(inputWindow->getInputString());
-    dataList->setHighlighted(dataList->size() -1 );
+    dataList->setHighlighted(dataList->size() - 1);
     if (checkOutOfBound()) {
         bottom = dataList->size();
-        top = dataList->size() - (windowPtr->getHeight() -2);
+        top = dataList->size() - (windowPtr->getHeight() - 2);
     } else {
         top = 0;
         bottom = dataList->size();

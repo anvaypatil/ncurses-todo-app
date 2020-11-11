@@ -13,8 +13,8 @@ DataList::~DataList() {
 
 }
 
-void DataList::addTask(std::string string) {
-    items->push_back(std::string(string));
+void DataList::addTask(std::string task) {
+    items->push_back(std::string(task));
 }
 
 TaskItem DataList::taskAt(size_t position) {
@@ -41,4 +41,8 @@ uint DataList::getHighlightedIndex() {
 
 void DataList::clear() {
     items->clear();
+}
+
+void DataList::addTask(TaskItem item) {
+    items->push_back(item);
 }

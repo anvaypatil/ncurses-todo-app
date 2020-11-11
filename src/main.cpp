@@ -1,6 +1,5 @@
 #include <WindowManager.h>
 #include <TaskManager.h>
-#include <iostream>
 
 using namespace std;
 

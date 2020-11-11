@@ -15,6 +15,7 @@ public:
     void save();
     void load();
 private:
+    bool fileExists();
     std::shared_ptr<DataList> dataList;
 };
 
