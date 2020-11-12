@@ -77,9 +77,9 @@ Responsibility Principle
   - The project demonstrates an understanding of C++ functions and control structures.<br/>
     - References: all files.
   - The project reads data from a file and process the data, or the program writes data to a file.<br/>
-    - References: [TaskPersistence.h] & [TaskPersistence.cpp].
+    - References: [TaskPersistence.h](include/TaskPersistence.h) & [TaskPersistence.cpp](src/TaskPersistence.cpp).
   - The project accepts user input and processes the input.<br/>
-    - References: [TaskManager.h]  `addPromotControls` to take user inputs. 
+    - References: [TaskManager.h](include/TaskManager.h)  `addPromoptControls` to take user inputs. 
     
 ### Object Oriented Programming
   - The project uses Object Oriented Programming techniques.<br/>
@@ -87,33 +87,33 @@ Responsibility Principle
   - Classes use appropriate access specifiers for class members.<br/>
     - Since not using properties for holding data on parent under inheritance chain, din't got a case to use `protected`.
   - Class constructors utilize member initialization lists. <br/>
-    - References: [TaskItem.cpp]
+    - References: [TaskItem.cpp](src/TaskItem.cpp)
   - Classes abstract implementation details from their interfaces.<br/>
     - Classes takes into account contracts for data sharing across.
   - Classes encapsulate behavior.<br/>
     - Classes have behaviours encapsulated and exposed only relevant abstractions.
   - Classes follow an appropriate inheritance hierarchy.<br/>
-    - Composition is used in cases like [InputWindow.h] & [Window.h]. Was in need of a generic class for serializing <br>
-      functionality. Used pure virtual functions in [Serializable.h].
+    - Composition is used in cases like [InputWindow.h](include/InputWindow.h) & [Window.h](include/Window.h). Was in need of a generic class for serializing <br>
+      functionality. Used pure virtual functions in [Serializable.h](include/Serializable.h).
   - Overloaded functions allow the same function to operate on different parameters.
-    - used constructor overloading under [TaskItem.h]
+    - used constructor overloading under [TaskItem.h](include/TaskItem.h)
   - Derived class functions override virtual base class functions.
-    - class named `TaskItemSerializer` under [TaskItem.h]  
+    - class named `TaskItemSerializer` under [TaskItem.h](include/TaskItem.h)
   - Templates generalize functions in the project.
-    - used in [Serializable.h] for defining generic definitions of serializing behaviour. 
+    - used in [Serializable.h](include/Serializable.h) for defining generic definitions of serializing behaviour. 
 
 ### Memory Management
    - The project makes use of references in function declarations.
-     - used references at places where same data is shared across. example: [Datalist.h] `addTask(&string)`
+     - used references at places where same data is shared across. example: [DataList.h](include/DataList.h) `addTask(&string)`
    - The project uses smart pointers instead of raw pointers.
      - used smart pointers extensively at places where data is owned under composition by entities.<br/>
-      [TaskManager.h],[DataList.h], [InputWindow.h], [TextContent.h] 
+      [TaskManager.h](include/TaskManager.h),[DataList.h](include/DataList.h), [InputWindow.h](include/InputWindow.h), [TextContent.h](include/TextContent.h) 
    - The project follows the Rule of 5.
-     - used in [TaskItem.h]
+     - used in [TaskItem.h](include/TaskItem.h)
    - The project uses move semantics to move data, instead of copying it, where possible.
-     - used in [TaskItem.h]
+     - used in [TaskItem.h](include/TaskItem.h)
    - The project uses destructors appropriately.
-     - had to use in [Window.h] to manage ncurses windows and din't had a need to use at other places, <br/>
+     - had to use in [Window.h](include/Window.h) to manage ncurses windows and din't had a need to use at other places, <br/>
      since used smart pointers.
      
  ## Concurrency
