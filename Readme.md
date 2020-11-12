@@ -18,7 +18,7 @@ There are few features which are yet to be implemented and will be mentioned in 
 ## Instructions for Running the Project
 1. With the build done, run the executable `./todo`
 2. The terminal window will take over full terminal screen and one can see <br/>
-<img align="center" src="images/todo-img-4.png" width="300" />
+<img align="center" src="images/todo-img-4.png" width="600" />
 3. As you can see on screen in `Control Pane` section here are the functionalities 
     - Insert A Task
         - One can use `i` key to initiate insert of the Task. 
@@ -34,9 +34,9 @@ There are few features which are yet to be implemented and will be mentioned in 
         - One can use `Space Bar` on highlighted task to toggle the task as complete/in-complete and <br/> 
         on UI it will shown as `[x]` for marked tasks. 
 ## Screenshots:
-<img align="center" src="images/todo-img-1.png" width="300" />
-<img align="center" src="images/todo-img-2.png" width="300" />
-<img align="center" src="images/todo-img-3.png" width="300" />
+<img align="center" src="images/todo-img-1.png" width="600" />
+<img align="center" src="images/todo-img-2.png" width="600" />
+<img align="center" src="images/todo-img-3.png" width="600" />
 
 ## Overview of Code Structure
 1. Code structure follows a pattern of creating separate directory for header & source files. 
