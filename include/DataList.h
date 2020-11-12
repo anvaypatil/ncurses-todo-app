@@ -12,7 +12,7 @@ class DataList {
 public:
     DataList();
     ~DataList();
-    void addTask(std::string string);
+    void addTask(std::string &string);
     void addTask(TaskItem item);
     void deleteTask(const size_t index);
     TaskItem &taskAt(size_t position);
