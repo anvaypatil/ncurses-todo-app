@@ -5,7 +5,6 @@
 #include <iostream>
 
 void WindowManager::initializeScreen() {
-    std::cout << "\033]0;" << "todo" << "\7" << std::flush;
     initscr();
     raw();
 

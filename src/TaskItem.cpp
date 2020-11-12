@@ -6,10 +6,14 @@
 #include <iostream>
 #include <HelperFunctions.h>
 
-TaskItem::TaskItem(const std::string &task) : task(task) {}
+TaskItem::TaskItem(const std::string &taskDetails) : taskDetails(taskDetails) {}
+
+TaskItem::TaskItem(const std::string &task, bool taskComplete): taskDetails(task), complete(taskComplete) {
+
+}
 
 std::string TaskItem::getTask() {
-    return std::string(task);
+    return std::string(taskDetails);
 }
 
 void TaskItem::toggleComplete() {
@@ -35,10 +39,10 @@ std::string TaskItem::taskCompletedText(uint width) {
 TaskItem TaskItemSerializer::deserialize(std::string stream) {
     std::vector<std::string> out = HelperFunctions::stringSplit(stream, DELIMITER);
     if (out.size() == 2) {
-        TaskItem taskItem(out.at(0));
-        if (std::string("c").compare(out.at(1))==0) {
-            taskItem.toggleComplete();
-        }
+        TaskItem taskItem(
+                out.at(0),
+                std::string("c").compare(out.at(1)) == 0
+        );
         return taskItem;
     }
     return TaskItem(stream);

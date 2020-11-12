@@ -10,6 +10,7 @@
 class TaskItem{
 public:
     TaskItem(const std::string &task);
+    TaskItem(const std::string &task, bool taskComplete);
     bool isComplete();
     void toggleComplete();
     std::string getTask();
@@ -38,15 +39,15 @@ public:
         moveContent(other);
     }
 private:
-    std::string task;
+    std::string taskDetails;
     bool complete = false;
     void copyContent(const TaskItem &other) {
-        task = std::string(other.task);
+        taskDetails = std::string(other.taskDetails);
         complete = other.complete;
     }
 
     void moveContent(const TaskItem &other) {
-        task = std::move(other.task);
+        taskDetails = std::move(other.taskDetails);
         complete = std::move(other.complete);
     }
 };

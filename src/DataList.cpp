@@ -10,8 +10,8 @@ DataList::~DataList() {
 
 }
 
-void DataList::addTask(std::string task) {
-    items->push_back(std::string(task));
+void DataList::addTask(std::string &task) {
+    items->push_back(task);
 }
 
 TaskItem &DataList::taskAt(size_t position) {

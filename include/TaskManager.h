@@ -22,18 +22,16 @@ private:
     void toggleCompleteTask();
     void moveUp();
     void moveDown();
+    bool checkOutOfBound();
+    void displayTasks();
+    void initDataListForDisplay();
+    void refreshDisplayList();
+
     std::shared_ptr<Window> windowPtr;
     std::shared_ptr<InputWindow> inputWindow;
     std::shared_ptr<DataList> dataList;
-    void displayTasks();
     uint top, bottom;
-
-    bool checkOutOfBound();
     std::unique_ptr<TaskPersistence> taskPersistence;
-
-    void initDataListForDisplay();
-
-    void refreshDisplayList();
 };
 
 
